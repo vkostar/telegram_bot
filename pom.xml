@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.github.javarushcommunity</groupId>
 	<artifactId>javarush-telegrambot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Javarush TelegramBot</name>
-	<description>Telgeram bot for Javarush from community to community</description>
+	<version>0.1.0-SNAPSHOT</version>
+	<name> TelegramBot</name>
+	<description>Telgeram bot  from community to community</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
