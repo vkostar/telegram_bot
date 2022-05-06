@@ -1,3 +1,4 @@
+
 package com.github.javarushcommunity.jrtb.javarushclient;
 
 import com.github.javarushcommunity.jrtb.javarushclient.dto.GroupDiscussionInfo;
@@ -44,3 +45,4 @@ public interface JavaRushGroupClient {
      */
     GroupDiscussionInfo getGroupById(Integer id);
 }
+
