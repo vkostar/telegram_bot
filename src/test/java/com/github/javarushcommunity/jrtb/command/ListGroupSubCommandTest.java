@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.github.javarushcommunity.jrtb.command.AbstractCommandTest.prepareUpdate;
 import static com.github.javarushcommunity.jrtb.command.CommandName.LIST_GROUP_SUB;
 
 @DisplayName("Unit-level testing for ListGroupSubCommand")
@@ -25,7 +26,7 @@ public class ListGroupSubCommandTest {
         //given
         TelegramUser telegramUser = new TelegramUser();
         telegramUser.setActive(true);
-        telegramUser.setChatId(String.valueOf(Long.valueOf("1")));
+        telegramUser.setChatId(String.valueOf(1L));
 
         List<GroupSub> groupSubList = new ArrayList<>();
         groupSubList.add(populateGroupSub(1, "gs1"));
@@ -38,26 +39,22 @@ public class ListGroupSubCommandTest {
         SendBotMessageService sendBotMessageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
 
-        Mockito.when(telegramUserService.findByChatId(String.valueOf(telegramUser.getChatId()))).thenReturn(Optional.of(telegramUser));
+        Mockito.when(telegramUserService.findByChatId(telegramUser.getChatId())).thenReturn(Optional.of(telegramUser));
 
         ListGroupSubCommand command = new ListGroupSubCommand(sendBotMessageService, telegramUserService);
 
-        Update update = new Update();
-        Message message = Mockito.mock(Message.class);
-        Mockito.when(message.getChatId()).thenReturn(Long.valueOf(telegramUser.getChatId()));
-        Mockito.when(message.getText()).thenReturn(LIST_GROUP_SUB.getCommandName());
-        update.setMessage(message);
+        Update update = prepareUpdate(Long.valueOf(telegramUser.getChatId()), LIST_GROUP_SUB.getCommandName());
 
-        String collectedGroups = "Я нашел все подписки на группы: \n\n" +
-                telegramUser.getGroupSubs().stream()
-                        .map(it -> "Группа: " + it.getTitle() + " , ID = " + it.getId() + " \n")
-                        .collect(Collectors.joining());
+        String joinedGroups = telegramUser.getGroupSubs().stream()
+                .map(it -> "Группа: " + it.getTitle() + " , ID = " + it.getId() + " \n")
+                .collect(Collectors.joining());
+        String collectedGroups = String.format("Я нашел все подписки на группы: \n\n %s", joinedGroups);
 
         //when
         command.execute(update);
 
         //then
-        Mockito.verify(sendBotMessageService).sendMessage(String.valueOf(telegramUser.getChatId()), collectedGroups);
+        Mockito.verify(sendBotMessageService).sendMessage(telegramUser.getChatId(), collectedGroups);
     }
 
     private GroupSub populateGroupSub(Integer id, String title) {
