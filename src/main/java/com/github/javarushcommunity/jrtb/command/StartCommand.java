@@ -14,7 +14,7 @@ public class StartCommand implements Command {
     private final TelegramUserService telegramUserService;
 
     public final static String START_MESSAGE = "Привет Друзья Мордвичане)). Я  Telegram Bot. Я помогу тебе быть в курсе последних " +
-            "статей тех авторов, котрые тебе интересны. Я еще маленький и только учусь.";
+            "статей тех авторов, которые тебе интересны. Я еще маленький и только учусь.";
 
     public StartCommand(SendBotMessageService sendBotMessageService, TelegramUserService telegramUserService) {
         this.sendBotMessageService = sendBotMessageService;
@@ -33,7 +33,7 @@ public class StartCommand implements Command {
                 () -> {
                     TelegramUser telegramUser = new TelegramUser();
                     telegramUser.setActive(true);
-                    telegramUser.setChatId(chatId);
+                    telegramUser.setChatId((chatId));
                     telegramUserService.save(telegramUser);
                 });
 
