@@ -21,6 +21,15 @@ public class GroupSubServiceImpl implements GroupSubService {
         this.groupSubRepository = groupSubRepository;
         this.telegramUserService = telegramUserService;
     }
+    @Override
+    public GroupSub save(GroupSub groupSub) {
+        return groupSubRepository.save(groupSub);
+    }
+
+    @Override
+    public Optional<GroupSub> findById(Integer id) {
+        return groupSubRepository.findById(id);
+    }
 
     @Override
     public GroupSub save(String chatId, GroupDiscussionInfo groupDiscussionInfo) {
