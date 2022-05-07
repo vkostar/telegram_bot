@@ -11,6 +11,8 @@ public enum CommandName {
     HELP("/help"),
     STAT("/stat"),
     ADD_GROUP_SUB("/addgroupsub"),
+
+    DELETE_GROUP_SUB("/deletegroupsub"),
     NO("nocommand");
 
     private final String commandName;
