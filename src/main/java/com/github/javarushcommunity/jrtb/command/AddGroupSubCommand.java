@@ -48,7 +48,7 @@ public class AddGroupSubCommand implements Command {
             if (isNull(groupById.getId())) {
                 sendGroupNotFound(chatId, groupId);
             }
-            GroupSub savedGroupSub = groupSubService.save(chatId, groupById);
+            GroupSub savedGroupSub = groupSubService.save(Long.valueOf(chatId), groupById);
             sendBotMessageService.sendMessage(chatId, "Подписал на группу " + savedGroupSub.getTitle());
         } else {
             sendGroupNotFound(chatId, groupId);

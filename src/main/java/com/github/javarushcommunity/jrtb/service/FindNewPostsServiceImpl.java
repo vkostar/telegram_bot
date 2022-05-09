@@ -52,7 +52,7 @@ public class FindNewPostsServiceImpl implements FindNewPostsService {
 
         gSub.getUsers().stream()
                 .filter(TelegramUser::isActive)
-                .forEach(it -> sendMessageService.sendMessage(it.getChatId(), messagesWithNewPosts));
+                .forEach(it -> sendMessageService.sendMessage(it.getChatId(), String.valueOf(messagesWithNewPosts)));
     }
 
     private void setNewLastPostId(GroupSub gSub, List<PostInfo> newPosts) {
