@@ -1,7 +1,10 @@
 
 # Release Notes
 
+
 ## 0.7.0-SNAPSHOT
+
+=======
 
 ## 0.6.0-SNAPSHOT
 
